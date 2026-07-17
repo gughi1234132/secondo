@@ -337,8 +337,8 @@
             
             .demo-banner { bottom: 10px; right: 10px; width: calc(100% - 20px); max-width: 340px; padding: 1.2rem; }
         }
-        /* ==========================================
-   FIX SOVRAPPOSIZIONE PIATTAFORME MOBILE
+   /* ==========================================
+   FIX ANIMAZIONE PIATTAFORME MOBILE
    ========================================== */
 @media (max-width: 1024px) {
     .hw-container {
@@ -347,25 +347,34 @@
     }
     
     .hw-sticky-panel {
-        position: relative !important;
-        top: 0 !important;
-        z-index: 10;
-        margin-bottom: 2rem;
+        position: sticky !important;
+        top: 70px !important; /* Blocca l'immagine sotto la barra di navigazione */
+        z-index: 20 !important;
+        
+        /* Questo è il trucco: crea una maschera solida che nasconde il testo 
+           quando ci scorre dietro. Si adatta alla Light/Dark mode. */
+        background-color: var(--bg-dark); 
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+        margin-bottom: 0;
     }
     
     .hw-scroller {
         position: relative;
         z-index: 5;
-        gap: 4rem !important;
-        padding: 0 !important;
+        gap: 15vh !important;
+        padding-top: 5vh !important;
     }
     
     .hw-block {
-        opacity: 1 !important;
-        /* Assegniamo il colore di sfondo della sezione in modo che 
-           copra sempre eventuali elementi sottostanti, 
-           adattandosi in automatico alla Light/Dark mode */
-        background-color: var(--bg-dark); 
+        /* Ripristiniamo le opacità per far funzionare di nuovo l'animazione JS */
+        opacity: 0.3 !important; 
+        transition: opacity 0.5s var(--ease-luxury), border-color 0.5s;
+        background-color: transparent !important;
+    }
+    
+    .hw-block.active-panel {
+        opacity: 1 !important; /* Si illumina quando arriva a centro schermo */
     }
 }
     </style>

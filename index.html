@@ -34,13 +34,13 @@
            1.1. LIGHT MODE (EDITORIAL & LUXURY CLINIC)
            ========================================== */
         body.light-mode {
-            --bg-dark: #FDFBF7; /* Bianco sporco caldo editoriale */
-            --bg-surface: #F5F2EB; /* Avorio per staccare le sezioni */
-            --bg-card: #FFFFFF; /* Bianco puro per le card */
+            --bg-dark: #FDFBF7;
+            --bg-surface: #F5F2EB;
+            --bg-card: #FFFFFF;
             
-            --accent: #9A8367; /* Bronzo/Champagne scuro per leggibilità */
+            --accent: #9A8367;
             --accent-muted: rgba(154, 131, 103, 0.2);
-            --text-main: #18181A; /* Antracite profondo, non nero puro */
+            --text-main: #18181A;
             --text-muted: #6B6B70;
             --border-fine: rgba(0, 0, 0, 0.08);
         }
@@ -79,7 +79,6 @@
             letter-spacing: 0.25em; color: var(--accent); display: block; margin-bottom: 1rem; font-weight: 600;
         }
 
-        /* Bottoni */
         .btn-luxury {
             display: inline-flex; align-items: center; justify-content: center; padding: 0.9rem 2.2rem; background: transparent;
             color: var(--text-main); font-family: var(--font-sans); font-size: 0.75rem;
@@ -97,7 +96,6 @@
         }
         .btn-link:hover { border-color: var(--accent); }
 
-        /* Setup Animazione 3D Titoli */
         .reveal-word { 
             display: inline-block; overflow: hidden; vertical-align: bottom; 
             perspective: 1000px; padding-bottom: 0.15em; margin-bottom: -0.15em;
@@ -111,7 +109,7 @@
         }
 
         /* ==========================================
-           3. NAVBAR SOTTILE
+           3. NAVBAR SOTTILE & HAMBURGER MENU
            ========================================== */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 4vw;
@@ -123,7 +121,7 @@
         }
         body.light-mode .navbar { background: rgba(253, 251, 247, 0.85); }
         
-        .brand { font-family: var(--font-serif); font-size: 1.4rem; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
+        .brand { font-family: var(--font-serif); font-size: 1.4rem; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; position: relative; z-index: 1002;}
         .brand em { font-style: italic; color: var(--accent); }
         
         .nav-links { display: flex; gap: 2.5rem; align-items: center; list-style: none; }
@@ -132,6 +130,9 @@
 
         .nav-actions-group { border-left: 1px solid var(--border-fine); padding-left: 2.5rem; display: flex; align-items: center; gap: 1.5rem; }
 
+        .nav-mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1002; padding: 10px; }
+        .nav-mobile-toggle span { width: 22px; height: 1px; background: var(--text-main); transition: 0.3s; }
+        
         /* ==========================================
            4. HERO & OVERLAY DINAMICO
            ========================================== */
@@ -203,13 +204,13 @@
         .tech-hardware { padding: 12vw 0; background: var(--bg-dark); transition: background 0.8s; }
         .hw-container { display: grid; grid-template-columns: 4.5fr 5.5fr; gap: 7vw; align-items: start; }
         
-        .hw-sticky-panel { position: sticky; top: 15vh; }
+        .hw-sticky-panel { position: sticky; top: 15vh; z-index: 10; }
         .hw-viewport { width: 100%; aspect-ratio: 3/4; overflow: hidden; position: relative; border: 1px solid var(--border-fine); clip-path: inset(0 100% 0 0); }
         .hw-slide-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; visibility: hidden; transition: opacity 0.8s var(--ease-luxury), transform 1s var(--ease-luxury); transform: scale(1.05); filter: brightness(0.8) grayscale(0.5); }
         .hw-slide-img.active { opacity: 1; visibility: visible; transform: scale(1); }
         body.light-mode .hw-slide-img { filter: brightness(0.95) grayscale(0.3); }
 
-        .hw-scroller { display: flex; flex-direction: column; gap: 20vh; padding-top: 10vh; padding-bottom: 20vh; }
+        .hw-scroller { display: flex; flex-direction: column; gap: 20vh; padding-top: 10vh; padding-bottom: 20vh; position: relative; z-index: 11; }
         .hw-block { opacity: 0.2; transition: opacity 0.5s var(--ease-luxury), border-color 0.5s; border-left: 1px solid var(--border-fine); padding-left: 2.5rem; }
         .hw-block.active-panel { opacity: 1; border-color: var(--accent); }
         .hw-block-title { font-size: 2.5rem; margin-bottom: 1.2rem; }
@@ -278,29 +279,63 @@
         .footer-row-bottom { display: flex; justify-content: space-between; border-top: 1px solid var(--border-fine); padding-top: 2rem; font-size: 0.75rem; color: var(--text-muted); }
 
         /* ==========================================
-           12. RESPONSIVE
+           12. BANNER SITO VETRINA
+           ========================================== */
+        .demo-banner {
+            position: fixed; bottom: 20px; right: 20px;
+            background: #171717; border-radius: 4px;
+            padding: 1.5rem; width: 340px; z-index: 9999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            font-family: var(--font-sans);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .demo-banner-title { color: #A86442; font-size: 1.1rem; margin-bottom: 0.8rem; font-family: var(--font-sans); font-weight: 500;}
+        .demo-banner-text { color: #e0e0e0; font-size: 0.85rem; line-height: 1.5; margin-bottom: 1.5rem; font-weight: 300;}
+        .demo-banner-btn {
+            display: block; text-align: center; background: #965030; color: #fff;
+            text-decoration: none; padding: 0.9rem; font-size: 0.75rem;
+            text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;
+            border-radius: 2px; transition: background 0.3s;
+        }
+        .demo-banner-btn:hover { background: #b05f3b; }
+
+        /* ==========================================
+           13. RESPONSIVE
            ========================================== */
         @media (max-width: 1024px) {
             .hw-container, .unit-row, .unit-row:nth-child(even) { grid-template-columns: 1fr; gap: 3rem; }
-            .hw-sticky-panel { position: relative; top: 0; }
-            .hw-viewport { aspect-ratio: 16/9; }
-            .hw-scroller { gap: 8vh; padding: 0; }
-            .hw-block { opacity: 1; }
+            .hw-sticky-panel { position: sticky; top: 12vh; }
+            .hw-viewport { aspect-ratio: 16/9; max-height: 40vh; }
+            .hw-scroller { gap: 10vh; padding-top: 5vh; padding-bottom: 10vh; }
+            .hw-block { opacity: 0.3; }
+            .hw-block.active-panel { opacity: 1; }
             .unit-row:nth-child(even) .unit-media-wrapper { grid-column: 1; }
             .unit-row:nth-child(even) .unit-text-wrapper { grid-column: 1; grid-row: 2; }
         }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            .nav-mobile-toggle { display: flex; }
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+                background: rgba(5, 5, 6, 0.98); border-left: 1px solid var(--border-fine);
+                flex-direction: column; justify-content: center; align-items: flex-start;
+                padding: 2rem; transition: right 0.5s var(--ease-luxury); z-index: 1000;
+            }
+            body.light-mode .nav-links { background: rgba(253, 251, 247, 0.98); }
+            .nav-links.active { right: 0; }
+            
             .data-strip-inner { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
             .booking-split { grid-template-columns: 1fr; gap: 4rem; }
             
-            .board-pin-container { padding: 4rem 0; display: block; }
-            .board-horizontal-track { flex-direction: column; gap: 2rem; width: 100%; padding: 0; }
-            .doctor-horizontal-card { width: 100%; height: auto; grid-template-columns: 1fr; }
+            .board-pin-container { padding: 4rem 0; display: flex; }
+            .board-horizontal-track { flex-direction: row !important; gap: 5vw; width: max-content; padding-left: 4vw; padding-right: 4vw;}
+            .doctor-horizontal-card { width: 85vw; height: auto; grid-template-columns: 1fr; }
             .doc-media { height: 300px; border-right: none; border-bottom: 1px solid var(--border-fine); }
+            
             .footer-matrix { grid-template-columns: 1fr; gap: 3rem; }
             .footer-row-bottom { flex-direction: column; gap: 1rem; }
+            
+            .demo-banner { bottom: 10px; right: 10px; width: calc(100% - 20px); max-width: 340px; padding: 1.2rem; }
         }
     </style>
 </head>
@@ -308,14 +343,19 @@
 
     <nav class="navbar">
         <a href="#" class="brand">Mind<em>Neuro</em></a>
+        
+        <div class="nav-mobile-toggle" id="mobile-menu-btn">
+            <span></span><span></span><span></span>
+        </div>
+
         <ul class="nav-links">
             <li><a href="#twin" class="nav-link">Digital Twin</a></li>
             <li><a href="#unita" class="nav-link">Dipartimenti</a></li>
             <li><a href="#tecnologia" class="nav-link">Piattaforme</a></li>
             <li><a href="#comitato" class="nav-link">Équipe</a></li>
-            <li class="nav-login">
-                <button id="theme-toggle" class="nav-link" style="background:none; border:none; padding:0; margin-right: 1.5rem;">Mode: Chiaro</button>
-                <a href="#prenota" class="nav-link" style="color:var(--text-main);">Area Pazienti &rarr;</a>
+            <li class="nav-login" style="margin-top: 1rem;">
+                <button id="theme-toggle" class="nav-link" style="background:none; border:none; padding:0; margin-right: 1.5rem; text-align: left;">Mode: Chiaro</button>
+                <a href="#prenota" class="nav-link" style="color:var(--text-main); display: block; margin-top: 1rem;">Area Pazienti &rarr;</a>
             </li>
         </ul>
     </nav>
@@ -596,6 +636,12 @@
         </div>
     </footer>
 
+    <div class="demo-banner">
+        <h4 class="demo-banner-title">Sito Vetrina</h4>
+        <p class="demo-banner-text">Questo è un ambiente dimostrativo creato per mostrare il design e le funzionalità.</p>
+        <a href="https://sito.luca-dordoni1.workers.dev/" target="_self" class="demo-banner-btn">TORNA AL SITO PRINCIPALE</a>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -605,7 +651,7 @@
         gsap.registerPlugin(ScrollTrigger);
 
         // ==========================================
-        // 1. GESTIONE THEME LIGHT / DARK MODE
+        // 1. GESTIONE THEME LIGHT / DARK MODE & MOBILE MENU
         // ==========================================
         const themeBtn = document.getElementById('theme-toggle');
         
@@ -614,7 +660,6 @@
             const isLight = document.body.classList.contains('light-mode');
             themeBtn.innerText = isLight ? 'Mode: Scuro' : 'Mode: Chiaro';
             
-            // Passa l'informazione al WebGL Shader per aggiornare i colori!
             if(window.heroShaderInstance) {
                 gsap.to(window.heroShaderInstance.material.uniforms.u_isLightMode, {
                     value: isLight ? 1.0 : 0.0,
@@ -622,6 +667,21 @@
                     ease: "power2.inOut"
                 });
             }
+        });
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if(window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                }
+            });
         });
 
         // ==========================================
@@ -649,7 +709,6 @@
             });
         });
 
-        // Il trigger del Footer attivato correttamente alla fine della pagina
         document.querySelectorAll('.text-animate-3d-footer').forEach(block => {
             gsap.to(block.querySelectorAll('.reveal-word span'), {
                 y: "0%", rotateX: 0, opacity: 1, duration: 1.4, ease: "power4.out", stagger: 0.05,
@@ -688,7 +747,7 @@
         diveTl.from("#layer-3 img", { scale: 0.5, duration: 1.5 }, 3.5);
         
         diveTl.to("#layer-3 .dt-info", { opacity: 0, duration: 0.2 }, 4.5);
-        diveTl.to("#layer-3 img", { filter: "brightness(0.5) blur(4px)", duration: 1 }, 4.5); // Leggero blur
+        diveTl.to("#layer-3 img", { filter: "brightness(0.5) blur(4px)", duration: 1 }, 4.5);
         diveTl.to("#dt-final-ui", { autoAlpha: 1, y: -20, duration: 1 }, 5);
 
         // ==========================================
@@ -700,7 +759,7 @@
         gsap.ticker.lagSmoothing(0);
 
         // ==========================================
-        // 6. HERO WEBGL SHADER: MODIFICA LIGHT/DARK
+        // 6. HERO WEBGL SHADER
         // ==========================================
         class ShaderHero {
             constructor() {
@@ -752,7 +811,7 @@
                     uniforms: {
                         progress: { type: "f", value: 0.0 },
                         effectFactor: { type: "f", value: 1.2 },
-                        u_isLightMode: { type: "f", value: 0.0 }, // Nuova variabile per la Light Mode
+                        u_isLightMode: { type: "f", value: 0.0 },
                         texture1: { type: "t", value: this.textures[0] },
                         texture2: { type: "t", value: this.textures[1] },
                         displacement: { type: "t", value: this.dispTexture }
@@ -777,9 +836,8 @@
                             
                             vec4 finalColor = mix(t1, t2, progress);
                             
-                            // Gestione colore tra Dark e Light Mode
-                            vec3 darkTint = vec3(0.02, 0.02, 0.03); // Nero profondo
-                            vec3 lightTint = vec3(0.98, 0.97, 0.95); // Bianco caldo
+                            vec3 darkTint = vec3(0.02, 0.02, 0.03);
+                            vec3 lightTint = vec3(0.98, 0.97, 0.95);
                             vec3 currentTint = mix(darkTint, lightTint, u_isLightMode);
                             
                             finalColor.rgb = mix(finalColor.rgb, currentTint, 0.35);
@@ -845,50 +903,49 @@
             }
         }
         
-        // Esponi globalmente l'istanza per permettere al tasto Light Mode di comunicare con lei
         window.heroShaderInstance = new ShaderHero();
 
         // ==========================================
-        // 7. STICKY SCROLL MACCHINARI
+        // 7. STICKY SCROLL MACCHINARI (Ora attivo anche da mobile)
         // ==========================================
-        if(window.innerWidth > 1024) {
-            const blocks = document.querySelectorAll('.hw-block');
-            blocks.forEach(block => {
-                ScrollTrigger.create({
-                    trigger: block,
-                    start: "top 55%", end: "bottom 55%",
-                    onToggle: self => {
-                        if(self.isActive) {
-                            blocks.forEach(b => b.classList.remove('active-panel'));
-                            block.classList.add('active-panel');
-                            const target = block.getAttribute('data-panel');
-                            document.querySelectorAll('.hw-slide-img').forEach(img => img.classList.remove('active'));
-                            document.getElementById(target).classList.add('active');
-                        }
+        const blocks = document.querySelectorAll('.hw-block');
+        blocks.forEach(block => {
+            ScrollTrigger.create({
+                trigger: block,
+                start: "top 55%", end: "bottom 55%",
+                onToggle: self => {
+                    if(self.isActive) {
+                        blocks.forEach(b => b.classList.remove('active-panel'));
+                        block.classList.add('active-panel');
+                        const target = block.getAttribute('data-panel');
+                        document.querySelectorAll('.hw-slide-img').forEach(img => img.classList.remove('active'));
+                        document.getElementById(target).classList.add('active');
                     }
-                });
-            });
-        }
-
-        // ==========================================
-        // 8. SCROLL ORIZZONTALE EQUIPE
-        // ==========================================
-        if(window.innerWidth > 768) {
-            const track = document.getElementById('horizontal-scroll-wrapper');
-            const cards = document.querySelectorAll(".doctor-horizontal-card");
-            
-            gsap.to(cards, {
-                xPercent: -102 * (cards.length - 1),
-                ease: "none",
-                scrollTrigger: {
-                    trigger: ".board-section",
-                    pin: true,
-                    scrub: 1,
-                    start: "center center", 
-                    end: () => "+=" + track.offsetWidth
                 }
             });
-        }
+        });
+
+        // ==========================================
+        // 8. SCROLL ORIZZONTALE EQUIPE (Ora attivo anche da mobile)
+        // ==========================================
+        const track = document.getElementById('horizontal-scroll-wrapper');
+        const cards = document.querySelectorAll(".doctor-horizontal-card");
+        
+        gsap.to(cards, {
+            xPercent: -102 * (cards.length - 1),
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".board-section",
+                pin: true,
+                scrub: 1,
+                start: "center center", 
+                end: () => "+=" + track.offsetWidth
+            }
+        });
+        
+        // Refresh trigger layout post render
+        setTimeout(() => { ScrollTrigger.refresh(); }, 500);
+
     </script>
 </body>
 </html>

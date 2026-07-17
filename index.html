@@ -337,6 +337,37 @@
             
             .demo-banner { bottom: 10px; right: 10px; width: calc(100% - 20px); max-width: 340px; padding: 1.2rem; }
         }
+        /* ==========================================
+   FIX SOVRAPPOSIZIONE PIATTAFORME MOBILE
+   ========================================== */
+@media (max-width: 1024px) {
+    .hw-container {
+        display: flex !important;
+        flex-direction: column;
+    }
+    
+    .hw-sticky-panel {
+        position: relative !important;
+        top: 0 !important;
+        z-index: 10;
+        margin-bottom: 2rem;
+    }
+    
+    .hw-scroller {
+        position: relative;
+        z-index: 5;
+        gap: 4rem !important;
+        padding: 0 !important;
+    }
+    
+    .hw-block {
+        opacity: 1 !important;
+        /* Assegniamo il colore di sfondo della sezione in modo che 
+           copra sempre eventuali elementi sottostanti, 
+           adattandosi in automatico alla Light/Dark mode */
+        background-color: var(--bg-dark); 
+    }
+}
     </style>
 </head>
 <body>
